@@ -11,7 +11,7 @@ var gulp = require('gulp'),
     ngmin = require('gulp-ngmin'), // ng压缩
     order = require('gulp-order'), // gulp文件排序
     gulpSequence = require('gulp-sequence').use(gulp), // task任务顺序执行
-    revCollector = require('gulp-rev-collector'),
+    revCollector = require('gulp-rev-collector'), //html 替换文件路径
     rev = require('gulp-rev'); // 文件hash版本号
 
 gulp.task('default', function() {
@@ -19,7 +19,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('sequence', function(cb) {
-    return gulpSequence('clean', 'minifycss', 'sass', 'minifyjs', 'rev')(cb);
+    return gulpSequence('minifycss', 'sass', 'minifyjs', 'rev')(cb);
 });
 
 gulp.task('rev', function() {
