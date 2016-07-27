@@ -1,0 +1,7 @@
+{
+    "server": {
+        "baseDir": "./dist"
+    },
+    "files": ["./dist/**/*.*"],
+    "https": true
+}
