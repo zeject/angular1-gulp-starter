@@ -4,5 +4,4 @@ rev
 .DS_Store
 *.log
 **/*npm-debug.log.*
-_test-output
 _temp
