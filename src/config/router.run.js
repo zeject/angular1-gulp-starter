@@ -39,6 +39,6 @@ app.run(function($rootScope, $state) {
         });
 
     /**页面加载完成 */
-    $scope.$on('$viewContentLoaded',
+    $rootScope.$on('$viewContentLoaded',
         function(event) {});
 });
