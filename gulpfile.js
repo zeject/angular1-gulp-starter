@@ -5,22 +5,28 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'), // 文件合并
     rename = require('gulp-rename'), // 重命名
     del = require('del'), // 文件删除
-    livereload = require('gulp-livereload'), // 实时刷新
+    //livereload = require('gulp-livereload'), // 实时刷新
     sass = require('gulp-ruby-sass'), // scss 编译
     ngAnnotate = require('gulp-ng-annotate'), // ng压缩
     ngmin = require('gulp-ngmin'), // ng压缩
     order = require('gulp-order'), // gulp文件排序
     gulpSequence = require('gulp-sequence').use(gulp), // task任务顺序执行
     revCollector = require('gulp-rev-collector'), //html 替换文件路径
-    rev = require('gulp-rev'); // 文件hash版本号
+    rev = require('gulp-rev'), // 文件hash版本号
+    sourcemaps = require('gulp-sourcemaps'), // map文件
+    postcss = require('gulp-postcss'), // 解析css
+    autoprefixer = require('autoprefixer'); // css 后缀
+
+var browserSync = require('browser-sync').create(); // 浏览器自动刷新
 
 gulp.task('default', function() {
-    return gulp.start('sequence');
+    return gulp.start('browserSync');
 });
 
 gulp.task('sequence', function(cb) {
     return gulpSequence('minifycss', 'sass', 'minifyjs', 'rev')(cb);
 });
+
 
 gulp.task('rev', function() {
     return gulp.src(['rev/**/*.json', 'src/**/*.html'])
@@ -48,10 +54,12 @@ gulp.task('minifyjs', function() {
         .pipe(ngmin({
             dynamic: false
         }))
+        .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(gulp.dest('dist/'))
         .pipe(concat('build.js'))
         .pipe(rev())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest('rev/js'));
@@ -59,9 +67,11 @@ gulp.task('minifyjs', function() {
 
 gulp.task('minifycss', function() {
     return gulp.src('src/!(lib)/**/*.css')
-        .pipe(gulp.dest('dist/'))
+        .pipe(sourcemaps.init())
         .pipe(minifycss())
         .pipe(rev())
+        .pipe(postcss([autoprefixer()]))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest('rev/css'));
@@ -74,8 +84,11 @@ gulp.task('sass', function() {
         .on('error', function(err) {
             console.error('Error!', err.message);
         })
+        .pipe(sourcemaps.init())
         .pipe(minifycss())
         .pipe(rev())
+        .pipe(postcss([autoprefixer()]))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest('rev/css'));
@@ -88,5 +101,16 @@ gulp.task('clean', function(cb) {
 
 gulp.task('watch', function() {
     // gulp.watch('src/**/*.*', ['default']);
-    return gulp.watch('src/**/*.*', ['default']);
+    return gulp.watch('src/**/*.*', ['sequence']);
+});
+
+gulp.task('browserSync', function() {
+    browserSync.init({
+        server: {
+            baseDir: 'dist'
+        },
+        port: 9999
+    });
+    gulp.watch('src/**/*.*', ['sequence']);
+    gulp.watch('dist/**/*.html').on('change', browserSync.reload);
 });

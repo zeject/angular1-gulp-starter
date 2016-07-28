@@ -4,12 +4,13 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "npm run lite",
-    "lite": "lite-server"
+    "start": "concurrently \"gulp\" "
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^6.3.7",
+    "browser-sync": "^2.13.0",
     "concurrently": "^2.2.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
@@ -20,13 +21,14 @@
     "gulp-ng-annotate": "^2.0.0",
     "gulp-ngmin": "^0.3.0",
     "gulp-order": "^1.1.1",
+    "gulp-postcss": "^6.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^7.1.0",
     "gulp-rev-collector": "^1.0.5",
     "gulp-ruby-sass": "^2.0.6",
     "gulp-sequence": "^0.4.5",
-    "gulp-uglify": "^1.5.3",
-    "lite-server": "^2.2.2"
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3"
   },
   "dependencies": {}
 }
