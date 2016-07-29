@@ -156,6 +156,6 @@ gulp.task('browserSync', ['dev'], function() {
         },
         port: 9999
     });
-    gulp.watch('src/**/*.*', ['dev']);
+    // gulp.watch('src/**/*.*', ['dev']).on('change', browserSync.reload);
     gulp.watch('dist/**/*.html').on('change', browserSync.reload);
 });
