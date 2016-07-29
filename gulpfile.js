@@ -32,7 +32,7 @@ gulp.task('dev', function(cb) {
 });
 
 gulp.task('devCss', function() {
-    return gulp.src('src/!(lib)/**/*.css')
+    return gulp.src(['src/!(lib)/**/*.css'])
         .pipe(rev())
         .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest('dist/'))
@@ -55,7 +55,8 @@ gulp.task('devSass', function() {
 });
 
 gulp.task('devJs', function() {
-    return gulp.src(['src/!(lib)/**/*.js'])
+    return gulp.src(['rev/**/*.json', 'src/!(lib)/**/*.js'])
+        .pipe(revCollector({}))
         .pipe(order([
             'src/config/app.module.js'
         ]))
@@ -148,7 +149,7 @@ gulp.task('watch', function() {
     return gulp.watch('src/**/*.*', ['dev']);
 });
 
-gulp.task('browserSync', function() {
+gulp.task('browserSync', ['dev'], function() {
     browserSync.init({
         server: {
             baseDir: 'dist'

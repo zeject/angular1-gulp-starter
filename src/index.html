@@ -6,6 +6,8 @@
     <title>angular1 starter</title>
     <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
     <script src="https://cdn.bootcss.com/angular-ui-router/1.0.0-beta.1/angular-ui-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/oclazyload/1.0.9/ocLazyLoad.min.js"></script>
+
     <script type="text/javascript" src="config/app.module.js"></script>
     <script type="text/javascript" src="config/router.run.js"></script>
     <script type="text/javascript" src="config/router.config.js"></script>
@@ -14,9 +16,9 @@
     <link rel="stylesheet" href="css/abc.css">
 </head>
 
-<body ng-init="a='string'">
-    this angular1 starter {{a}} {{vm.str}}
-    <p>hahha</p> hi
+<body>
+    <p>Welcome Angular gulp starter</p>
+    <ui-view>Loding...</ui-view>
 </body>
 
 </html>
