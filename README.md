@@ -1,1 +1,0 @@
-# angular1-gulp-starter
