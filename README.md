@@ -5,5 +5,5 @@ npm install
 监听修改
 gulp serve
 
-d发布
+发布
 gulp build
