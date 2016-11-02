@@ -42,7 +42,7 @@ var buildStyles = function () {
     };
 
     return gulp.src([
-            path.join(conf.paths.src, '/**/*.scss')
+            path.join(conf.paths.src, '/app/**/*.scss')
         ])
         .pipe($.inject(injectFiles, injectOptions))
         .pipe($.sourcemaps.init())
