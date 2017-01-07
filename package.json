@@ -50,5 +50,8 @@
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.2",
     "wrench": "~1.5.8"
+  },
+  "dependencies": {
+    "angular": "^1.6.1"
   }
 }

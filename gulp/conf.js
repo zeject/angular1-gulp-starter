@@ -19,6 +19,15 @@ exports.paths = {
     e2e: 'e2e'
 };
 
+exports.libSrc = {
+    style: [
+
+    ],
+    script: [
+        'node_modules/angular/angular.min.js'
+    ]
+}
+
 /**
  *  Common implementation for an error handler of a Gulp plugin
  */
