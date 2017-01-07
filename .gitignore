@@ -54,3 +54,5 @@ release/
 bower_components/
 dev-release/
 tmp/
+
+.DS_store
