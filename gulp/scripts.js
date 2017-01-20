@@ -20,6 +20,9 @@ gulp.task('scripts', function () {
 
 function buildScripts() {
     return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
+        .pipe($.babel({
+            presets: ['es2015']
+        }))
         .pipe($.eslint())
         .pipe($.eslint.format())
         .pipe($.size())
